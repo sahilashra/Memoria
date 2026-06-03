@@ -1,7 +1,7 @@
 # Memoria Business
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="Memoria Business — work item dashboard" width="820"/>
+  <img src="docs/screenshots/hero.png" alt="Memoria Business — ask anything across all your Memory Banks" width="820"/>
 </p>
 
 <p align="center">
