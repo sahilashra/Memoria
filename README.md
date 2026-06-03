@@ -1,6 +1,8 @@
 # Memoria Business
 
-![img.png](img.png)
+<p align="center">
+  <img src="docs/screenshots/dashboard.png" alt="Memoria Business — work item dashboard" width="820"/>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.9+-blue?style=flat-square&logo=python"/>
