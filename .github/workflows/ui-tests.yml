@@ -1,0 +1,91 @@
+name: UI & Unit Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-and-integration:
+    name: Unit + Integration tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run unit + integration + regression tests
+        run: python -m pytest tests/unit/ tests/integration/ tests/regression/ --tb=short -q
+
+      - name: Upload coverage report
+        if: always()
+        run: python -m pytest tests/unit/ tests/integration/ tests/regression/ --cov=memoria --cov-report=xml -q --tb=no
+        continue-on-error: true
+
+  ui-playwright:
+    name: Playwright UI tests
+    runs-on: ubuntu-latest
+    # Only runs once tests/ui/ directory exists and pytest-playwright is installed.
+    # Remove the `if` guard below once the Playwright suite is implemented.
+    if: ${{ false }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-playwright
+          playwright install chromium --with-deps
+
+      - name: Start Memoria server
+        run: |
+          cp tests/fixtures/config.yaml ~/.memoria/config.yaml || true
+          python -m memoria.server --port 7700 &
+          sleep 3
+
+      - name: Run Playwright tests
+        run: python -m pytest tests/ui/ --tb=short -q
+        env:
+          MEMORIA_BASE_URL: http://localhost:7700
+
+  e2e:
+    name: End-to-end tests
+    runs-on: ubuntu-latest
+    # Remove the `if` guard below once the E2E suite is implemented.
+    if: ${{ false }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest pytest-playwright
+          playwright install chromium --with-deps
+
+      - name: Run E2E tests
+        run: python -m pytest tests/e2e/ --tb=short -q

@@ -1,0 +1,62 @@
+# ─── Secrets — NEVER commit ──────────────────────────────────
+.env
+*.env
+!.env.example
+.mcp.json
+config.yaml
+
+# ─── Generated data / Memory Banks (chunked output) ──────────
+books/
+*.db
+*.sqlite3
+brief_state.json
+**/.chromadb/
+**/_work_sessions/
+
+# Runtime app data (uploads, chat history, captured screenshots)
+memoria/chats/
+memoria/project/
+
+# ─── Python build / cache ────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+
+# ─── Test & tooling caches ───────────────────────────────────
+.pytest_cache/
+.hypothesis/
+test_output/
+.playwright-mcp/
+.coverage
+htmlcov/
+
+# ─── Editor / OS / local tooling ─────────────────────────────
+.idea/
+.vscode/
+.kiro/
+.claude/
+.DS_Store
+Thumbs.db
+
+# ─── Local scratch ───────────────────────────────────────────
+/*.png
+server_out.txt
+server_err.txt
+server_*.txt
+
+# ─── Internal docs (not for public repo) ─────────────────────
+ROADMAP.md
+TEST_COVERAGE.md
+ABOUT.md
+TESTING.md
+
+# ─── Design mockups (handoff bundle, not product) ────────────
+stitch_enhanced_text_response_ui/
+
+# ─── Parked / unimplemented code (kept locally, not shipped) ─
+parked/

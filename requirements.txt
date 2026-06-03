@@ -1,0 +1,34 @@
+# Core
+litellm>=1.0.0
+click>=8.0.0
+rich>=13.0.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+gitpython>=3.1.0
+
+# Webhook server
+fastapi>=0.100.0
+uvicorn>=0.20.0
+
+# File watcher
+watchdog>=3.0.0
+
+# Vector search (ChromaDB is default — local, zero config)
+chromadb>=0.4.0
+
+# Cloud vector stores (optional — install only what you use)
+# pip install pinecone-client sentence-transformers   # for Pinecone
+# pip install weaviate-client sentence-transformers   # for Weaviate
+
+# Rich format extractors — documents (auto-installed)
+pdfplumber>=0.10.0
+python-docx>=1.0.0
+python-pptx>=0.6.21
+openpyxl>=3.1.0
+
+# Rich format extractors — HTML (optional, improves quality)
+# beautifulsoup4>=4.12.0   # falls back to stdlib html.parser if not installed
+
+# Rich format extractors — audio/video (optional, heavy)
+# pip install openai-whisper   (also requires ffmpeg: https://ffmpeg.org/download.html)
+# Images use the vision model already configured above — no extra install needed.

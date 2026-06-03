@@ -1,0 +1,66 @@
+# Copy to config.yaml and adjust. No secrets go here — API keys and tokens
+# live in .env and are referenced below as ${ENV_VAR}.
+
+model: bedrock/us.anthropic.claude-sonnet-4-5-20250929-v1:0
+max_tokens_per_file: 8000
+max_tokens_output: 15000
+
+ignore_dirs:
+- .git
+- node_modules
+- __pycache__
+- venv
+- .venv
+- dist
+- build
+- .next
+- coverage
+- .pytest_cache
+ignore_extensions:
+- .pyc
+- .lock
+- .log
+- .ico
+- .svg
+- .woff
+- .ttf
+- .map
+- .avi
+- .exe
+- .dll
+- .so
+- .bin
+- .zip
+- .tar
+- .gz
+max_file_size: 50000
+books_dir: books
+
+hooks:
+  on_pr_merge:
+    enabled: false
+    only_if_files_changed: []
+  on_schedule:
+    enabled: false
+    cron: 0 9 * * 1
+  on_manual:
+    enabled: true
+
+vector_store:
+  provider: chromadb
+
+# Optional: live connectors. Tokens come from .env via ${...} expansion.
+mcp_sources:
+- name: github
+  server: https://api.githubcopilot.com/mcp/
+  headers:
+    Authorization: Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}
+- name: mcp-atlassian
+  server: uvx mcp-atlassian
+  env:
+    JIRA_URL: ${JIRA_URL}
+    JIRA_USERNAME: ${JIRA_USERNAME}
+    JIRA_API_TOKEN: ${JIRA_API_TOKEN}
+    CONFLUENCE_URL: ${CONFLUENCE_URL}
+    CONFLUENCE_USERNAME: ${CONFLUENCE_USERNAME}
+    CONFLUENCE_API_TOKEN: ${CONFLUENCE_API_TOKEN}

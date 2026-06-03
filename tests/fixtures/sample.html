@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engineering Architecture — Confluence Export</title>
+  <style>body { font-family: Arial, sans-serif; }</style>
+</head>
+<body>
+  <header>Confluence | Engineering Space | Last edited: 2024-01-15</header>
+  <nav>Home > Engineering > Architecture > Overview</nav>
+
+  <div id="main-content">
+    <h1>System Architecture Overview</h1>
+    <p>This page describes the high-level architecture of the platform as of Q1 2024.</p>
+
+    <h2>Components</h2>
+    <p>The system consists of three main services:</p>
+    <ul>
+      <li><strong>API Gateway</strong> — handles all inbound requests, rate limiting, and authentication</li>
+      <li><strong>Core Service</strong> — business logic, data processing</li>
+      <li><strong>Reporting Service</strong> — async report generation, PDF export</li>
+    </ul>
+
+    <h2>Data Flow</h2>
+    <p>Requests enter via the API Gateway. Authentication is validated against the Auth Service.
+    Authenticated requests are forwarded to the Core Service. Reports are queued to the
+    Reporting Service via RabbitMQ and processed asynchronously.</p>
+
+    <h2>Key Decisions</h2>
+    <table border="1">
+      <tr><th>Decision</th><th>Chosen Approach</th><th>Reason</th></tr>
+      <tr><td>Auth strategy</td><td>JWT + refresh tokens</td><td>Stateless, scalable</td></tr>
+      <tr><td>Message queue</td><td>RabbitMQ</td><td>Already in stack, team familiar</td></tr>
+      <tr><td>Database</td><td>PostgreSQL</td><td>Strong ACID guarantees needed</td></tr>
+    </table>
+
+    <h2>Known Issues</h2>
+    <p>The Reporting Service has a memory leak when processing PDFs larger than 50MB.
+    Tracked in JIRA: ENG-1234. Workaround: restart the service weekly.</p>
+
+    <pre>
+# Start all services
+docker-compose up -d api-gateway core-service reporting-service
+    </pre>
+  </div>
+
+  <footer>Confluence | Engineering Space | Do not distribute externally</footer>
+</body>
+</html>

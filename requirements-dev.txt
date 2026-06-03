@@ -1,0 +1,18 @@
+# Dev/test dependencies (not required for production use)
+# Install with: pip install -r requirements-dev.txt
+# Then for Playwright:  playwright install chromium
+
+# Testing
+pytest>=7.4.0
+pytest-anyio>=0.0.0
+hypothesis>=6.80.0
+
+# Playwright UI tests
+playwright>=1.40.0
+pytest-playwright>=0.4.0
+
+# HTTP test client (FastAPI)
+httpx>=0.24.0
+
+# Additional test utilities
+pytest-cov>=4.0.0

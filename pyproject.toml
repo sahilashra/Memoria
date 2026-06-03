@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "memoria"
+version = "0.1.0"
+description = "Living memory banks for any codebase — structured knowledge for humans and AI"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "litellm>=1.0.0",
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "gitpython>=3.1.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.20.0",
+    "watchdog>=3.0.0",
+    "chromadb>=0.4.0",
+    "pdfplumber>=0.10.0",
+    "python-docx>=1.0.0",
+    "python-pptx>=0.6.21",
+    "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+# pip install memoria[mcp]      — enables `memoria pull` (MCP source connectors)
+mcp = ["mcp>=1.0.0"]
+# pip install memoria[audio]    — enables audio transcription via Whisper (MP3, WAV, M4A)
+audio = ["openai-whisper"]
+# pip install memoria[video]    — enables visual frame extraction from video files (MP4, MOV, AVI…)
+video = ["opencv-python>=4.8.0"]
+# pip install memoria[schedule] — enables cron expression schedules ("0 9 * * 1-5")
+schedule = ["croniter>=2.0.0"]
+# pip install memoria[all]      — everything
+all = ["mcp>=1.0.0", "openai-whisper", "opencv-python>=4.8.0", "croniter>=2.0.0", "beautifulsoup4"]
+# pip install memoria[dev]      — run the test suite
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+
+[project.scripts]
+memoria = "memoria.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["memoria*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+markers = [
+    "slow: marks tests as slow (deselect with '-m not slow')",
+    "live: marks tests that make real AI API calls",
+]
