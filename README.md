@@ -18,12 +18,12 @@ An adaptive AI work companion for engineering teams. Memoria pulls structured kn
 
 ```mermaid
 flowchart LR
-    Sources["Code · Docs · Slack<br/>Jira · Recordings"] --> Banks["Memory Banks<br/>structured per module"]
+    Sources["Your sources<br/>code · docs · tickets · chat · recordings"] --> Banks["Memory Banks<br/>structured per module"]
     Banks --> Graph["Knowledge Graph<br/>blast-radius analysis"]
     Banks --> Agent["Adaptive Work Agent"]
     Graph --> Agent
     Agent --> Review["Review artifacts<br/>code · tests"]
-    Review --> Write["Write-back<br/>branch · PR · Jira"]
+    Review --> Write["Write-back<br/>branch · PR · comment"]
 ```
 
 Your fragmented knowledge becomes structured **Memory Banks**. Those feed a **knowledge graph** (how everything connects) and an **adaptive agent** that assembles context for any ticket, generates artifacts for review, and proposes write-back actions — each confirmed by you.
