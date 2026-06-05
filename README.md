@@ -1,4 +1,4 @@
-# Memoria Business
+# Memoria
 
 <p align="center">
   <img src="docs/screenshots/hero.png" alt="Memoria Business — ask anything across all your Memory Banks" width="820"/>
