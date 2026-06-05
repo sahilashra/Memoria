@@ -14,6 +14,22 @@ An adaptive AI work companion for engineering teams. Memoria pulls structured kn
 
 ---
 
+## How it works
+
+```mermaid
+flowchart LR
+    Sources["Code · Docs · Slack<br/>Jira · Recordings"] --> Banks["Memory Banks<br/>structured per module"]
+    Banks --> Graph["Knowledge Graph<br/>blast-radius analysis"]
+    Banks --> Agent["Adaptive Work Agent"]
+    Graph --> Agent
+    Agent --> Review["Review artifacts<br/>code · tests"]
+    Review --> Write["Write-back<br/>branch · PR · Jira"]
+```
+
+Your fragmented knowledge becomes structured **Memory Banks**. Those feed a **knowledge graph** (how everything connects) and an **adaptive agent** that assembles context for any ticket, generates artifacts for review, and proposes write-back actions — each confirmed by you.
+
+---
+
 ## What it does
 
 - **Memory Banks** — structured, AI-optimized summaries of how your systems work, generated from code repos, documents, recordings, and connected tools. Hierarchical: one bank per module/package, not one giant dump.
@@ -28,8 +44,8 @@ It's model-agnostic via LiteLLM (Claude, OpenAI, Gemini, Bedrock, Ollama) and ru
 ## Quickstart
 
 ```bash
-git clone https://github.com/<your-org>/memoria-business
-cd memoria-business
+git clone https://github.com/sahilashra/Memoria
+cd Memoria
 pip install -e .
 
 cp .env.example .env            # add your provider API key
